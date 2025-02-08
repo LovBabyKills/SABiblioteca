@@ -1,0 +1,26 @@
+#RewriteEngine On
+#RewriteBase /
+
+# Reindirizza API base → controller/Controller.php
+#RewriteRule ^api/v1/biblioteca$ controller/Controller.php [QSA,L]
+
+# Reindirizza API con una risorsa (es. "biblioteca/utenti") → controller/Controller.php
+#RewriteRule ^api/v1/biblioteca/([a-zA-Z0-9_]+)$ controller/Controller.php?risorsa=$1 [QSA,L]
+
+# Reindirizza API con risorsa e ID (es. "biblioteca/libri/5") → controller/Controller.php
+#RewriteRule ^api/v1/biblioteca/([a-zA-Z0-9_]+)/([0-9]+)$ controller/Controller.php?risorsa=$1&id=$2 [QSA,L]
+
+# prova per evitare gli errori nei link con api/v1/persone/ - vuoto -
+#RewriteRule ^api/v1/biblioteca/$ controller/Controller.php [QSA,L]
+
+RewriteEngine On
+RewriteBase /
+
+# Reindirizza API base
+RewriteRule ^api/v1/biblioteca/?$ controller/Controller.php [QSA,L]
+
+# Reindirizza API con una risorsa (es. "biblioteca/utenti") → controller/Controller.php?risorsa=$1
+RewriteRule ^api/v1/biblioteca/([^/]+)/?$ controller/Controller.php?risorsa=$1 [QSA,L]
+
+# Reindirizza API con risorsa e ID (es. "biblioteca/libri/5") → controller/Controller.php?risorsa=libri&id=5
+RewriteRule ^api/v1/biblioteca/([^/]+)/([0-9]+)/?$ controller/Controller.php?risorsa=$1&id=$2 [QSA,L]

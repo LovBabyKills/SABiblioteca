@@ -1,0 +1,12 @@
+            //funzione per togliere i valori null da un array di oggetti
+            /**
+            echo json_encode(array_map(
+            fn($utente) => array_filter((array) $utente, fn($val) => $val !== null),
+            $utenti
+            ));
+            //in pratica array_map applica una funzione a ogni elemento dell'array
+            // (array utente) converte ogni oggetto utente in un array associativo
+            //array filter fin($val) => $val !== null rimuove i campi null
+            
+            //CAPIRE MEGLIO COSA FA STA COSAAAAAAAAAAA
+             */

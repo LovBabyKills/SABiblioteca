@@ -1,0 +1,42 @@
+services:
+  php:
+    build: ./biblioteca-php
+    container_name: php_container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./biblioteca-php:/var/www/html
+    restart: unless-stopped
+    user: "1000:1000"
+    depends_on:
+      - mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: biblioteca
+
+  mariadb:
+    image: mariadb:10.5
+    container_name: maria_container
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: biblioteca
+    volumes:
+      - ./mariadb-biblioteca:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: maria_container
+      PMA_USER: root
+      PMA_PASSWORD: test
+    ports:
+      - "8081:80"
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb_data:

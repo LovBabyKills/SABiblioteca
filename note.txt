@@ -10,3 +10,45 @@
             
             //CAPIRE MEGLIO COSA FA STA COSAAAAAAAAAAA
              */
+
+Ricerca libri per autore
+-- mi devo passare array con nome e cognome autore - NO MI PASSO id
+    Con l'id prendo tutti i libri che hanno l'idell'autore
+
+-- ricerca utenti che devono restituire un libro
+    --get all dei libri
+    -- prendere libri con data restituizione = null
+-- utente prenota libro
+    -- POST array da validare
+-- utente restituisce libro
+    -- PUT della data 
+-- DELETE di un prestito ? per id?
+
+--------------------------
+INPUT:
+------------------------------------------------------
+/api/v1/biblioteca/libri 
+RITORNA: null
+------------------------------------------------------
+/api/v1/biblioteca/libri/1
+RITORNA: NULL 
+Anche questo è NULL perché è una GET senza body JSON, ma avrai $_GET['id'] = "1" e $_GET['risorsa'] = "libri".
+------------------------------------------------------
+/api/v1/biblioteca/libri con body JSON:
+RITORNA:
+array(2) {
+  ["titolo"]=> string(3) "asd"
+  ["data_pubblicazione"]=> int(1990)
+}
+Questo perché json_decode(file_get_contents('php://input'), true) decodifica il JSON del body.
+------------------------------------------------------
+/api/v1/biblioteca/libri/1 con body JSON:
+array(2) {
+  ["titolo"]=> string(3) "asd"
+  ["data_pubblicazione"]=> int(1990)
+}
+ ma avrai anche $_GET['id'] = "1" e $_GET['risorsa'] = "libri".
+------------------------------------------------------
+PER CONVENZIONE NELLE RICHIESTE GET I PARAMETRI DEVONO 
+ESSERE PASSATI TRAMITE LINK E NON TRAMITE  BODY
+ad esempio /libri?idAutore=5

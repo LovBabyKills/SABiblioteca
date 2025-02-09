@@ -12,6 +12,7 @@ class ValidazioneDatiController{
         return $id;
     }
 
+    //risorsa e' quella mandata tramite link tipo api/v1/biblioteca/autori ... autori e' la risorsa
     public static function validazioneRisorsa(){
         $risorseValide = ['utenti', 'libri', 'prestiti', 'autori'];
         $risorsa = isset($_GET['risorsa']) ? $_GET['risorsa'] : null;
@@ -27,7 +28,7 @@ class ValidazioneDatiController{
     //le regole me le devo fare in diversi file a seconda dei form
     //poi applico le regole all'input
     public static function validazioneInput($input,){
-
+        
     }
 
     //validazione stringa

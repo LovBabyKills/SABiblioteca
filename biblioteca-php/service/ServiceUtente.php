@@ -9,11 +9,14 @@ class ServiceUtente
         $listaUtentiDTO = allUtentiToUtentiDTO(getAllRepoUtenti());
         return $listaUtentiDTO;
     }
-}
-/**
-function getUtenteByIdService($id){
-    $utente = getUtenteByIdRepoUtente($id);
-    return $utente;
-}
+
+
+
+/*
+    function getUtenteByIdService($id){
+        $utente = getUtenteByIdRepoUtente($id);
+        return $utente;
+    }
 
 */
+}

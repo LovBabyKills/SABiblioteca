@@ -1,5 +1,5 @@
 <?php
-class UtentedTO {
+class UtenteDTO {
     public $nome;
     public $cognome;
     public $email;

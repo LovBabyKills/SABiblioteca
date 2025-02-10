@@ -1,5 +1,5 @@
 <?php
 interface GestioneRichiesta{
-    public function gestisci(array $input, string $risorsa): void;
+    public function gestisci(array $input, array $risorsa): void;
 }
 ?>

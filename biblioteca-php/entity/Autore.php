@@ -31,19 +31,19 @@ class Autore {
     }
 
     //getter
-    function getId($id){
+    function getId(){
         return $this->id;
     }
 
-    function getNome($nome){
+    function getNome(){
         return $this->nome;
     }
 
-    function getCognome($cognome){
+    function getCognome(){
         return $this->cognome;
     }
 
-    function getDataNascita($dataNascita){
+    function getDataNascita(){
         return $this->dataNascita;
     }    
 }

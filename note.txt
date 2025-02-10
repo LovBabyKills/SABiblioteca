@@ -52,3 +52,23 @@ array(2) {
 PER CONVENZIONE NELLE RICHIESTE GET I PARAMETRI DEVONO 
 ESSERE PASSATI TRAMITE LINK E NON TRAMITE  BODY
 ad esempio /libri?idAutore=5
+
+-----------------------------------------------------
+GET
+  - Tutti i libri
+    - api/v1/libri
+  - Libri per autore - Id autore
+    - /libri?author_id={id}
+    oppure
+    - autori/id/libri
+  - Libri degli Utenti che hanno Prestiti dove data restituzione = null
+  - Tutti gli utenti che hanno prestiti con data restituzione = null
+POST
+  - nuovi utenti
+  - nuovi libri (dovendo inserire l'autore)
+  - prestiti a cui devo passare libro e utente
+  - nuovo autore
+PUT
+  - data restituzione di un prestito
+DELETE
+  - prestito per id?

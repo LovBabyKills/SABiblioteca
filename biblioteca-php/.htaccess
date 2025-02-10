@@ -13,14 +13,38 @@
 # prova per evitare gli errori nei link con api/v1/persone/ - vuoto -
 #RewriteRule ^api/v1/biblioteca/$ controller/Controller.php [QSA,L]
 
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+#RewriteEngine On
+#RewriteBase /
+
+# Reindirizza API base
+#RewriteRule ^api/v1/biblioteca/?$ controller/Controller.php [QSA,L]
+
+# Reindirizza API con una risorsa (es. "biblioteca/utenti") → controller/Controller.php?risorsa=$1
+#RewriteRule ^api/v1/biblioteca/([^/]+)/?$ controller/Controller.php?risorsa=$1 [QSA,L]
+
+# Reindirizza API con risorsa e ID (es. "biblioteca/libri/5") → controller/Controller.php?risorsa=libri&id=5
+#RewriteRule ^api/v1/biblioteca/([^/]+)/([0-9]+)/?$ controller/Controller.php?risorsa=$1&id=$2 [QSA,L]
+
+# Nuova regola per gestire autori/{id}/libri
+#RewriteRule ^api/v1/biblioteca/authors/([0-9]+)/books/?$ controller/Controller.php?risorsa=authors&id=$1&risorsa_2=books [QSA,L]
+
+# Nuova regola per gestire prestiti/attivi/libri
+#RewriteRule ^api/v1/biblioteca/loans/active/books/?$ controller/Controller.php?risorsa=loans&stato=active&risorsa2=books [QSA,L]
+
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+
 RewriteEngine On
 RewriteBase /
 
-# Reindirizza API base
+# Regole esistenti
 RewriteRule ^api/v1/biblioteca/?$ controller/Controller.php [QSA,L]
-
-# Reindirizza API con una risorsa (es. "biblioteca/utenti") → controller/Controller.php?risorsa=$1
 RewriteRule ^api/v1/biblioteca/([^/]+)/?$ controller/Controller.php?risorsa=$1 [QSA,L]
-
-# Reindirizza API con risorsa e ID (es. "biblioteca/libri/5") → controller/Controller.php?risorsa=libri&id=5
 RewriteRule ^api/v1/biblioteca/([^/]+)/([0-9]+)/?$ controller/Controller.php?risorsa=$1&id=$2 [QSA,L]
+
+# Regola generale per tre segmenti (es: prestiti/attivi/libri oppure autore/5/libri)
+RewriteRule ^api/v1/biblioteca/([^/]+)/([^/]+)/([^/]+)/?$ controller/Controller.php?risorsa=$1&id=$2&risorsa2=$3 [QSA,L]
+
+#------------------------------------------------------------------------------------------------------------------------------------------

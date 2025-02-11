@@ -20,7 +20,10 @@ class ServiceAutore
         return $this->autoreMapper->allAutoreToAutoreDTO($listaAutori);
     }
 
-
+    public function getById($id){
+        $autore = $this->repoAutore->getAutoreById($id);
+        return $this->autoreMapper->autoreToAutoreDTO($autore);
+    }
 
 /*
     function getUtenteByIdService($id){

@@ -4,7 +4,7 @@ class UtenteDTO {
     public $cognome;
     public $email;
 
-    public function __construct($nome = null, $cognome = null, $email = null){
+    public function __construct($nome, $cognome, $email){
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->email = $email;

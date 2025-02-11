@@ -1,6 +1,7 @@
 <?php
 include_once('/var/www/html/controller/validation/RegoleValidazione.php');
 
+
 function regolaProva(): array {
     //campo - regole - messaggio
     return [
@@ -15,23 +16,21 @@ function regolaProva(): array {
 
 //quindi devo passare in 
 
-function getBookRules(): array {
+function getRegoleLibro(): array {
     return [
         new RegoleValidazione('titolo', [
             'required' => true,
-            'type' => 'string',
+            'tipo' => 'stringa',
             'minLength' => 1,
             'maxLength' => 100
         ], 'Errore nella validazione del titolo'),
-        new RegoleValidazione('nome_autore', [
+        new RegoleValidazione('idAutore', [
             'required' => true,
-            'type' => 'string',
-            'minLength' => 3,
-            'maxLength' => 20
+            'tipo' => 'intero'
         ], 'Errore nella validazione del nome autore'),
-        new RegoleValidazione('anno_pubblicazione', [
+        new RegoleValidazione('annoPubblicazione', [
             'required' => true,
-            'type' => 'integer'
+            'tipo' => 'intero'
         ], 'Errore nella validazione dell\'anno di pubblicazione')
     ];
 }

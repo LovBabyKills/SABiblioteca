@@ -17,7 +17,7 @@ Ricerca libri per autore
 
 -- ricerca utenti che devono restituire un libro
     --get all dei libri
-    -- prendere libri con data restituizione = null
+    -- prendere prestiti con data restituizione = null
 -- utente prenota libro
     -- POST array da validare
 -- utente restituisce libro

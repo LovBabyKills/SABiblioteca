@@ -39,12 +39,17 @@
 RewriteEngine On
 RewriteBase /
 
-# Regole esistenti
-RewriteRule ^api/v1/biblioteca/?$ controller/Controller.php [QSA,L]
+# API principale senza parametri (es. /biblioteca/autori)
 RewriteRule ^api/v1/biblioteca/([^/]+)/?$ controller/Controller.php?risorsa=$1 [QSA,L]
+
+# API con ID numerico (es. /biblioteca/autori/5)
 RewriteRule ^api/v1/biblioteca/([^/]+)/([0-9]+)/?$ controller/Controller.php?risorsa=$1&id=$2 [QSA,L]
 
-# Regola generale per tre segmenti (es: prestiti/attivi/libri oppure autore/5/libri)
-RewriteRule ^api/v1/biblioteca/([^/]+)/([^/]+)/([^/]+)/?$ controller/Controller.php?risorsa=$1&id=$2&risorsa2=$3 [QSA,L]
+# API con azione specifica (es. /biblioteca/prestiti/azione/daRestituire)
+RewriteRule ^api/v1/biblioteca/([^/]+)/azione/([^/]+)/?$ controller/Controller.php?risorsa=$1&azione=$2 [QSA,L]
+
+# API con ID e sottorisorsa (es. /biblioteca/autori/5/libri) - libri scritti dall'autore con id 5
+RewriteRule ^api/v1/biblioteca/([^/]+)/([0-9]+)/([^/]+)/?$ controller/Controller.php?risorsa=$1&id=$2&sottorisorsa=$3 [QSA,L]
+
 
 #------------------------------------------------------------------------------------------------------------------------------------------

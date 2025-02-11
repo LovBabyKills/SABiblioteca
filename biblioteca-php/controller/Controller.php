@@ -2,59 +2,70 @@
 include '../componenti/connessione.php';
 include '../entity/Utente.php';
 require_once 'GestioneGet.php';
+require_once 'GestionePost.php';
 
 header("Content-Type: application/json");
 $input = json_decode(file_get_contents('php://input'), true) ?? [];  //se l'input non ce credo un array vuoto perche' devo comunque passare un array
 $method = $_SERVER['REQUEST_METHOD'];
 
-var_dump($input);
+//var_dump($input);
 
 $arrayMetodi = [
-    'GET' => GestioneGet::class
+    'GET' => GestioneGet::class,
+    'POST' => GestionePost::class
 ];
 
+$risorsa = $_GET['risorsa'] ?? null;
+$azione = $_GET['azione'] ?? null;
+$id = $_GET['id'] ?? null;
+$sottorisorsa = $_GET['sottorisorsa'] ?? null;
+
+// Controllo validità dei parametri
 $arrayRisorsa = ['autori', 'libri', 'prestiti', 'utenti'];
-$arrayRisorsaDue = ['autori', 'libri'];
+$arrayAzioni = ['daRestituire'];
+$arraySottorisorsa = ['autori', 'libri'];
 
-//verifico che il link sia giusto e mi prendo la risorsa
-if (isset($_GET['risorsa']) && in_array($_GET['risorsa'], $arrayRisorsa)) {
-    $risorsa = $_GET['risorsa'];  // Corretto il typo in $_GET['risorsa']
-    
-
-    if (isset($_GET['id'])) {    //il parametro non e' obbligatorio
-        $id = $_GET['id'];
-        
-        if (isset($_GET['risorsa2'])) { //controllo se esiste, se esiste deve stare nll'array altrimenti do errore
-            if (array_key_exists($_GET['risorsa2'], $arrayRisorsaDue)) {
-                $risorsa2 = $_GET['risorsa2'];
-            } else {
-                http_response_code(400);
-                echo json_encode(['errore' => 'risorsa2 non valida']);
-                exit;  // Aggiunto exit dopo l'errore
-            }
-        }
-    }
-} else {
+if (!in_array($risorsa, $arrayRisorsa)) {
     http_response_code(400);
-    echo json_encode(['errore' => 'Risorsa non valida']);  
+    echo json_encode(['errore' => 'Entità non valida']);
     exit;
 }
-//esempio autori/1/libri per prendere i libri dell'autore con id 1
+
+if ($azione !== null && !in_array($azione, $arrayAzioni)) {
+    http_response_code(400);
+    echo json_encode(['errore' => 'Azione non valida']);
+    exit;
+}
+
+if ($id !== null && (!is_numeric($id) || $id <= 0)) {
+    http_response_code(400);
+    echo json_encode(['errore' => 'ID non valido']);
+    exit;
+}
+
+if ($sottorisorsa !== null && !in_array($sottorisorsa, $arraySottorisorsa)) {
+    http_response_code(400);
+    echo json_encode(['errore' => 'Sottoentità non valida']);
+    exit;
+}
+
+// Parametri finali pronti per essere usati nel service
 $parametriInput = [
     'risorsa' => $risorsa,
-    'id' => $id ?? null,
-    'risorsa2' => $risorsa2 ?? null
+    'azione' => $azione ?: null,
+    'id' => $id !== null ? (int) $id : null,
+    'sottorisorsa' => $sottorisorsa ?: null
 ];
+
 
 
 //se esiste il metodo nell'array istanzione la classe Gestionemetodo e chiamo il suo metodo gestisci passando l'input
-if(isset($arrayMetodi[$method])){
+if (isset($arrayMetodi[$method])) {
     $classe = $arrayMetodi[$method];
     $gestione = new $classe($conn);
-    $gestione->gestisci($input, $parametriInput);    
-}else{
+    $gestione->gestisci($input, $parametriInput);
+} else {
     http_response_code(400);
     echo json_encode(['errore' => 'Metodo errato']);
     exit;
 }
-?>

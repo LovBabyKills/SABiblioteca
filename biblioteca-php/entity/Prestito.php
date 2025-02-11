@@ -35,6 +35,22 @@ class Prestito {
     function setDataRestituzione($dataRestituzione){
         $this->dataRestituzione = $dataRestituzione;
     }
+
+    function getId(){
+        return $this->id;
+    }
+    function getIdUtente(){
+        return $this->idUtente;
+    }
+    function getIdLibro(){
+        return $this->idLibro;
+    }
+    function getDataPrestito(){
+        return $this->dataPrestito;
+    }
+    function getDataRestituzione(){
+        return $this->dataRestituzione;
+    }
 }
 
 ?>

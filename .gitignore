@@ -1,1 +1,5 @@
 mariadb-biblioteca/.DS_Store
+mariadb-biblioteca/aria_log*
+mariadb-biblioteca/ib*
+mariadb-biblioteca/*.log
+
